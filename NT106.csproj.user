@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="FmChinhSua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmDailyPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmDangKy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmDangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmDoiMK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmForget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmLibrary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmOTP_Forget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FmTrangChu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Job.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

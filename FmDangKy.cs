@@ -1,4 +1,4 @@
-﻿using Authentication.Classes;
+using Authentication.Classes;
 using Google.Cloud.Firestore;
 using System;
 using System.Collections.Generic;
@@ -24,6 +24,7 @@ namespace NT106.O22
         {
 
             var database = FirestoreHelper.database;
+            //Kiểm tra email đã tồn tại hay chưa
             if (CheckIfUserAlreadyExist())
             {
                 lbPassErr.Text = "";
@@ -31,8 +32,10 @@ namespace NT106.O22
                 lbMailErr.ForeColor = Color.Red;
                 return;
             }
-            if (txtPasswd.Text != null || txtAgain.Text != null)
-            {
+            //email chưa tồn tại; kiểm tra xem đã nhập mật khẩu hay chưa
+            else if (txtPasswd.Text != "" && txtAgain.Text != "")
+            {   
+                //đã nhập mật khẩu; ktra xem mật khẩu có trùng khớp hay không
                 if (txtPasswd.Text != txtAgain.Text)
                 {
                     lbMailErr.Text = "";
@@ -40,29 +43,35 @@ namespace NT106.O22
                     lbPassErr.ForeColor = Color.Red;
                     return;
                 }
+
+                //Mật khẩu trùng khớp thì ktra OTP
+                if (otp.ToString().Equals(txtOTP.Text))
+                {
+                    var data = GetWriteData();
+                    DocumentReference doc = database.Collection("UserData").Document(data.Email);
+                    doc.SetAsync(data);
+                    Hide();
+                    FmDangNhap fmDangNhap = new FmDangNhap();
+                    fmDangNhap.ShowDialog();
+                    Close();
+                }
+                else
+                {
+                    lbPassErr.Text = "";
+                    lbMailErr.Text = "";
+                    lbPasswd.Text = "";
+                    lbError.Text = "Vui lòng nhập đúng OTP!";
+                    lbError.ForeColor = Color.Red;
+                }
+            }
+            else
+            {
                 lbError.Text = "";
                 lbMailErr.Text = "";
                 lbPassErr.Text = "";
                 lbPasswd.Text = "Vui lòng nhập mật khẩu!";
-                lbError.ForeColor = Color.Red;
-            }
-            if (otp.ToString().Equals(txtOTP.Text))
-            {
-                var data = GetWriteData();
-                DocumentReference doc = database.Collection("UserData").Document(data.Email);
-                doc.SetAsync(data);
-                Hide();
-                FmDangNhap fmDangNhap = new FmDangNhap();
-                fmDangNhap.ShowDialog();
-                Close();
-            }
-            else
-            {
-                lbPassErr.Text = "";
-                lbMailErr.Text = "";
-                lbPasswd.Text = "";
-                lbError.Text = "Vui lòng nhập đúng OTP!";
-                lbError.ForeColor = Color.Red;
+                lbPasswd.ForeColor = Color.Red;
+
             }
         }
 
